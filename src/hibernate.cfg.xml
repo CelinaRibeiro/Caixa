@@ -23,7 +23,8 @@
 		<property name="hibernate.connection.autocommit">false</property>
 		<property name="hibernate.connection.pool_size">50</property>
 
-		<!-- <mapping class="br.com.Pessoa"/> -->
+		<!-- Declaração de entidades-->
+		<mapping class="br.com.project.model.classes.Entidade"/> 
 
 		<listener
 			class="org.hibernate.envers.event.AuditEventListener"

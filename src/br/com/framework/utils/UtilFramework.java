@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
  * @author Celina
  *
  */
+//Essa classe carrega o código do usuário
 @Component
 public class UtilFramework implements Serializable{
 
