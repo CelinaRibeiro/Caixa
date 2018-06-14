@@ -43,8 +43,7 @@
 		<location>/error/error.jsf</location>
 	</error-page>
 
-	<!-- define jsp config p não dar erro no projeto e torná-lo compatível com 
-		jsp -->
+	<!-- define jsp config p não dar erro no projeto e torná-lo compatível com jsp -->
 	<jsp-config>
 		<jsp-property-group>
 			<url-pattern>/**</url-pattern>

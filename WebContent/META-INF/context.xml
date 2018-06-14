@@ -2,6 +2,7 @@
 
 <Context reloadable="true">
 
+	<!-- Configuração da coneção com bd -->
 	<Resource 
 	name="jdbc/datasource"
 	auth="Container"
@@ -22,7 +23,7 @@
 	antiResourceLocking="false"
 	username="postgres"
 	password="admin"
-	url="jdbc:postgresql://localhost:5432/caixaki?autoReconect=true"
+	url="jdbc:postgresql://localhost:5432/caixaki?autoReconnect=true"
 
  />
 

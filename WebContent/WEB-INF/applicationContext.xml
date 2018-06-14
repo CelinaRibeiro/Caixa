@@ -58,7 +58,7 @@
 	<bean id="flyway" class="org.flywaydb.core.Flyway"
 		init-method="migrate" lazy-init="false">
 		<property name="dataSource" ref="springDataSource" />
-		<property name="baseLineOnMigrate" value="true" />
+		<property name="baselineOnMigrate" value="true" />
 		<property name="table" value="version" />
 		<property name="sqlMigrationPrefix" value="v" />
 		<property name="sqlMigrationSeparator" value="_" />

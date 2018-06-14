@@ -36,7 +36,7 @@
 			access="isAuthenticated() and hasAnyRole('USER') " />
 
 		<!-- Acesso total para todos os users ALL -->
-		<intercept-url pattern="/publico/**" access="permitALL" />
+		<intercept-url pattern="/publico/**" access="permitAll" />
 
 		<form-login login-page="/publico/login.jsf"
 			always-use-default-target="true"

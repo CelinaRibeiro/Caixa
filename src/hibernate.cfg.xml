@@ -15,7 +15,6 @@
 		<property name="hibernate.jdbc.batch_size">100</property>
 		<property name="hibernate.cache.use_second_cache">true</property>
 		<property name="hibernate.transaction.auto_close_session">true</property>
-		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="hibernate.show_sql">false</property>
 		<property name="hibernate.format_sql">true</property>
 		<property name="hibernate.generate_statistics">false</property>
@@ -23,8 +22,8 @@
 		<property name="hibernate.connection.autocommit">false</property>
 		<property name="hibernate.connection.pool_size">50</property>
 
-		<!-- Declaração de entidades-->
-		<mapping class="br.com.project.model.classes.Entidade"/> 
+		<!-- Declaração de entidades -->
+		<mapping class="br.com.project.model.classes.Entidade" />
 
 		<listener
 			class="org.hibernate.envers.event.AuditEventListener"
@@ -39,12 +38,14 @@
 		<listener
 			class="org.hibernate.envers.event.AuditEventListener"
 			type="post-collection-recreate" />
+
 		<listener
 			class="org.hibernate.envers.event.AuditEventListener"
-			type="post-collection-update" />
+			type="pre-collection-update" />
+			
 		<listener
 			class="org.hibernate.envers.event.AuditEventListener"
-			type="post-collection-remove" />
+			type="pre-collection-remove" />
 
 	</session-factory>
 </hibernate-configuration>

@@ -14,7 +14,7 @@ import org.hibernate.envers.Audited;
  * @author Celina
  *
  */
-@Audited //audited -> será criado no banco uma tabela de auditoria p/ cada tabela original
+@Audited //audited - será criado no banco uma tabela de auditoria p/ cada tabela original
 @Entity
 public class Entidade implements Serializable {
 	
