@@ -142,7 +142,7 @@
 	<!-- Controllers -->
 	
 	<!-- Daos -->
-	<bean id="sepositoryLogin"
+	<bean id="repositoryLogin"
 		class="br.com.dao.implementacao.DaoLogin"
 		scope="singleton"/>
 	
