@@ -29,8 +29,7 @@
 		<h:panelGroup rendered="#{!empty param.login_error}">
 			<h:outputLabel
 				rendered="#{SPRING_SECURITY_LAST_EXCEPTION.message == 'Bad credentials'}">
-				<span class="estiloSpan"> Permissão Negada, login ou senha
-					incorretos. </span>
+				<span class="estiloSpan"> Permissão Negada, login ou senha incorretos. </span>
 			</h:outputLabel>
 
 			<h:outputLabel
@@ -72,7 +71,7 @@
 	</div>
 	
 	<script>
-		$('#j_username').focus;
+		$('#j_username').focus();
 	</script>
 </h:body>
 </html>
