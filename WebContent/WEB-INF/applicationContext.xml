@@ -113,7 +113,7 @@
 		lazy-init="false">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/webContext/" />
+		<property name="prefix" value="/WebContent/" />
 		<property name="suffix"
 			value="*.jsf, *.xhtml, *.html, *.jsp, *.js" />
 	</bean>
@@ -142,7 +142,7 @@
 
 	<!-- Services -->
 	<bean id="srvLogin"
-		class="package br.com.srv.implementacao.SrvLoginImpl"
+		class="br.com.srv.implementacao.SrvLoginImpl"
 		scope="singleton"/>
 	
 	<!-- Daos -->
