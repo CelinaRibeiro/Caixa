@@ -1,3 +1,15 @@
+
+function logout(contextPath) {
+	var post = 'invalidar_session';
+
+	$.ajax({
+		type:"POST",
+		url: post
+	}).always(function(resposta) {
+		document.location = contextPath + '/j_spring_security_logout';
+	});
+}
+
 function invalidarSession(context, pagina) {
 	document.location = (context + pagina + ".jsf");
 
@@ -20,6 +32,6 @@ function validarSenhaLogin() {
 		return false;
 
 	}
-	
+
 	return true;
 }
