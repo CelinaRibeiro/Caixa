@@ -41,7 +41,7 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 	private SimpleJdbcInsertImplements simpleJdbcInsert;
 
 	@Autowired
-	private SimpleJdbcClassImpl simpleJdbcClassImpl;
+	private SimpleJdbcTemplateImpl simpleJdbcTemplateImpl;
 
 	@Override
 	public void save(T obj) throws Exception {
@@ -144,7 +144,7 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 
 	}
 
-	//limpa o objeto da memória
+	// limpa o objeto da memória
 	@Override
 	public void evict(Object objs) throws Exception {
 		validaSessionFactory();
@@ -179,9 +179,9 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 	public SimpleJdbcInsert getSimpleJdbcInsert() {
 		return simpleJdbcInsert;
 	}
-
-	public SimpleJdbcClassImpl getSimpleJdbcClassImpl() {
-		return simpleJdbcClassImpl;
+	
+	public SimpleJdbcTemplateImpl getSimpleJdbcTemplateImpl() {
+		return simpleJdbcTemplateImpl;
 	}
 
 	@Override
@@ -199,23 +199,32 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 	}
 
 	/*
-	 * Realiza consulta no banco de dados, iniciando o carregamento a partir do registro passado  no parâmetro
-	 * -> iniciaNoRegistro e obtendo maximo de resultados passados em -> maximoResultado
+	 * Realiza consulta no banco de dados, iniciando o carregamento a partir do
+	 * registro passado no parâmetro -> iniciaNoRegistro e obtendo maximo de
+	 * resultados passados em -> maximoResultado
 	 * 
 	 * @param query
+	 * 
 	 * @param iniciaNoRegistro
+	 * 
 	 * @param maximoResultado
+	 * 
 	 * @return List<T>
+	 * 
 	 * @throws Exception
 	 * 
 	 * (non-Javadoc)
-	 * @see br.com.framework.interfac.crud.InterfaceCrud#findListByQueryDinamica(java.lang.String, int, int)
+	 * 
+	 * @see
+	 * br.com.framework.interfac.crud.InterfaceCrud#findListByQueryDinamica(java.
+	 * lang.String, int, int)
 	 */
 	@Override
 	public List<T> findListByQueryDinamica(String query, int iniciaNoRegistro, int maximoResultado) throws Exception {
 		validaSessionFactory();
 		List<T> lista = new ArrayList<T>();
-		lista = sessionFactory.getCurrentSession().createQuery(query).setFirstResult(iniciaNoRegistro).setMaxResults(maximoResultado).list();
+		lista = sessionFactory.getCurrentSession().createQuery(query).setFirstResult(iniciaNoRegistro)
+				.setMaxResults(maximoResultado).list();
 		return lista;
 	}
 
@@ -247,12 +256,31 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 		sessionFactory.getCurrentSession().flush();
 
 	}
-	
-	public List<Object[]> getListSQLDinamicaArray(String sql) throws Exception{
+
+	public List<Object[]> getListSQLDinamicaArray(String sql) throws Exception {
+		validaSessionFactory();
+
+		List<Object[]> lista = (List<Object[]>) sessionFactory.getCurrentSession().createSQLQuery(sql).list();
+		return lista;
+	}
+
+	public T findUniqueByQueryDinamica(String query) throws Exception {
+		validaSessionFactory();
+		T obj = (T) sessionFactory.getCurrentSession().createQuery(query.toString()).uniqueResult();
+		return obj;
+	}
+
+	public T findInuqueByProperty(Class<T> entidade, Object valor, String atributo, String condicao) throws Exception {
+		
 		validaSessionFactory();
 		
-		List<Object[]> lista = (List<Object[]>) sessionFactory.getCurrentSession().createSQLQuery(sql).list();
-				return lista;
+		StringBuilder query = new StringBuilder();
+		query.append(" select entity  from ").append(entidade.getSimpleName()).append(" entity where entity.")
+				.append(atributo).append(" = '").append(valor).append("' ").append(condicao);
+
+		T obj = (T) this.findUniqueByQueryDinamica(query.toString());
+
+		return obj;
 	}
 
 }

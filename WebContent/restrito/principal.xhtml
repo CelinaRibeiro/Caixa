@@ -7,15 +7,8 @@
 	xmlns:sec="http://www.springframework.org/security/facelets/tags"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head>
+<ui:composition template="/templates/templatePrincipal.xhtml">
 
-<h:form>
-	<h:body>
-		<ui:include src="/templates/barraProgresso.xhtml"/>
-		<h1>Principal</h1>
-		
-		<p:commandButton value="Testa Status" ajax="true" icon="ui-icon-refresh"/>
-	
-	</h:body>
-</h:form>
+</ui:composition>
+
 </html>

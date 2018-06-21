@@ -43,7 +43,8 @@
 		<location>/error/error.jsf</location>
 	</error-page>
 
-	<!-- define jsp config p não dar erro no projeto e torná-lo compatível com jsp -->
+	<!-- define jsp config p não dar erro no projeto e torná-lo compatível com 
+		jsp -->
 	<jsp-config>
 		<jsp-property-group>
 			<url-pattern>/**</url-pattern>
@@ -76,6 +77,7 @@
 			WEB-INF\applicationContext-security.xml
 		</param-value>
 	</context-param>
+
 
 	<context-param>
 		<param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
