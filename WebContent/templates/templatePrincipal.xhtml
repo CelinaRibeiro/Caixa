@@ -9,75 +9,144 @@
 <!-- Segurança do spring security -->
 <sec:isAuthenticated>
 
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		
-	<title><ui:insert name="titulo">Caixaki</ui:insert></title>
-		
-	<!-- Tags and Libs -->
-	<h:outputScript name="primefaces.js" library="primefaces" id="jsPrime" />
-	<h:outputScript name="jquery.js" library="primefaces/jquery" id="jsJquery" />
-	<h:outputScript name="jquery-plugins.js" library="primefaces/jquery" id="jsJqueryPlugin" />
-	<h:outputScript name="jquery.cookie.js" library="javascript" id="jsJaqueryCookie" />
-	<h:outputStylesheet name="jquery-ui.css" library="primefaces/jquery/ui" id="jsJqueryUi" />
-	<h:outputStylesheet name="primefaces.css" library="primefaces" id="jdPrimeCss" />
-	<h:outputScript name="jquery.maskMoney.min.js" library="javascript" id="jsMaskMoneySistema" />
-	<h:outputScript name="jquery.maskedinput.js" library="javascript" id="jsMaskInputSistema" />
-	<h:outputScript name="scripty.js" library="javascript" id="jsScriptSistema" />
-	<h:outputScript name="jsf.js" library="javax.faces"/>
-	<h:outputScript name="googlechart.js" library="javascript"/>
-	<h:outputScript name="deployJava.js" library="javascript"/>
-		
-</h:head>
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<h:form id="formTemplate" prependId="false">
-	<h:outputStylesheet name="estilo.css" library="css" id="cssStileSistema"/>
-	
-	<h:body>
-		<script type="text/javascript" charset="UTF-8">
-			$.noConflit();
-			
-			/*Bloqueia F5 do teclado*/
-			$(document).keydown(function (e){
-				if(e.which == 116){
-					return 116;
-				}
-			});
-		</script>
-		
-		<!-- Inclui barra de progresso -->
-		<ui:include src="/templates/barraProgresso.xhtml"/>
-		
-		<div id="msgError">
-			<p:growl id="msg" showDetail="false" sticky="true"
-			redisplay="true" autoUpdate="true" life="6000"/>
-			
-			<!-- Tooltip global -->
-			<p:tooltip id="toolTipFocus" globalSelector="a, :input, :button"
-			showEvent="focus" hideEvent="blur"/>
-		</div>
-		
-		<div id="container">
-			<div id="topo">
-				<span style="position: absolute; left: 20px; top: 14px" id="spanLogo">
-					<h:graphicImage library="img" name="logo.png" id="logoImg"
-					styleClass="bordaImagem"/>
-				</span>
+		<title><ui:insert name="titulo">Caixaki</ui:insert></title>
+
+		<!-- Tags and Libs -->
+		<h:outputScript name="primefaces.js" library="primefaces" id="jsPrime" />
+		<h:outputScript name="jquery.js" library="primefaces/jquery"
+			id="jsJquery" />
+		<h:outputScript name="jquery-plugins.js" library="primefaces/jquery"
+			id="jsJqueryPlugin" />
+		<h:outputScript name="jquery.cookie.js" library="javascript"
+			id="jsJaqueryCookie" />
+		<h:outputStylesheet name="jquery-ui.css"
+			library="primefaces/jquery/ui" id="jsJqueryUi" />
+		<h:outputStylesheet name="primefaces.css" library="primefaces"
+			id="jdPrimeCss" />
+		<h:outputScript name="jquery.maskMoney.min.js" library="javascript"
+			id="jsMaskMoneySistema" />
+		<h:outputScript name="jquery.maskedinput.js" library="javascript"
+			id="jsMaskInputSistema" />
+		<h:outputScript name="scripty.js" library="javascript"
+			id="jsScriptSistema" />
+		<h:outputScript name="jsf.js" library="javax.faces" />
+		<h:outputScript name="googlechart.js" library="javascript" />
+		<h:outputScript name="deployJava.js" library="javascript" />
+
+	</h:head>
+
+	<h:form id="formTemplate" prependId="false">
+		<h:outputStylesheet name="estilo.css" library="css"
+			id="cssStileSistema" />
+
+		<h:body>
+			<script type="text/javascript" charset="UTF-8">
+				$.noConflit();
+
+				/*Bloqueia F5 do teclado*/
+				$(document).keydown(function(e) {
+					if (e.which == 116) {
+						return 116;
+					}
+				});
+			</script>
+
+			<!-- Inclui barra de progresso -->
+			<ui:include src="/templates/barraProgresso.xhtml" />
+
+			<div id="msgError">
+				<p:growl id="msg" showDetail="false" sticky="true" redisplay="true"
+					autoUpdate="true" life="6000" />
+
+				<!-- Tooltip global -->
+				<p:tooltip id="toolTipFocus" globalSelector="a, :input, :button"
+					showEvent="focus" hideEvent="blur" />
+			</div>
+
+			<!-- Logo Topo -->
+			<div id="container">
+				<div id="topo">
+					<span style="position: absolute; left: 20px; top: 14px"
+						id="spanLogo"> <h:graphicImage library="img"
+							name="logo.png" id="logoImg" styleClass="bordaImagem" />
+					</span> 
+					
+					<!-- Dados último acesso - Topo -->
+					<span id="dadoslogin"> Usuário:
+						#{entidadeBeanView.usuarioLogadoSecurity} <br id="quebraUser" />
+						Último Login: <h:outputLabel
+							value="#{entidadeBeanView.ultimoAcesso}" id="saidaUltimoAcesso">
+							<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy HH:mm:ss"
+								dateStyle="long" timeStyle="full" timeZone="GMT-03:00" />
+						</h:outputLabel> <br id="quebraUltimoAcesso" /> <a href="#"
+						onclick="javascript:logout('#{request.contextPath}')">Sair</a>
+					</span>
+					
+					<!-- Seta do menu direito -->
+					 <span id="menuSistema"
+						style="position: absolute; right: 25px; top: 48px; width: 20px;">
+						<a href="#" onclick="abrirMenupop();"> <h:graphicImage
+								library="img" name="setabaixo.png" styleClass="bordaImagem"
+								id="imaSetaBaixo" />
+					</a>
+					</span>
+				</div>
 				
-				<span id="dadoslogin"> Usuário: #{entidadeBeanView.usuarioLogadoSecurity}
-					<br id="quebraUser"/>
-					Último Login:
-					<h:outputLabel value="#{entidadeBeanView.ultimoAcesso}"
-					id="saidaUltimoAcesso">	
-					<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy HH:mm:ss"
-					dateStyle="long" timeStyle="full" timeZone="GMT-03:00"/>	
-					</h:outputLabel>
-					<br id="quebraUltimoAcesso"/>	
-					<a href="#" onclick="javascript:logout('#{request.contextPath}')">Sair</a>			
+				<!-- Menu esquerdo -->
+				<div id="menu">
+					<span id="iniciarmenu">
+						<h:graphicImage library="img" name="iconemenu.png"
+						styleClass="bordaImagem" id="iconemenu">
+						Menu
+						</h:graphicImage>
+					</span>
+				</div>
 				
-				</span>
+				<!-- Parte central -->
+				<div id="corpo" class="corpo">
+					<ui:insert name="corpo"/>
+				</div>
+				
+				
+			<!-- Menu direita -->
+				<div id="menupop">
+				
+				<sec:ifAnyGranted roles="MENSAGENS_ENVIAR_ACESSAR, ADMIN">
+					<p:commandLink actionListener="#{mensagemBeanView.novo}" 
+					onsuccess="enviarMsgDialog.show();"
+					value="Enviar mensagem" immediate="true" style="display: block;"
+					id="enviarMensagem" ajax="true" process="@this">
+						
+						<p:ajax immediate="true" listener="#{mensagemBeanView.novo}"/>
+						</p:commandLink>
+				</sec:ifAnyGranted>
+				
+					<!-- Alterar senha -->
+					<a href='#' onclick="alterarSenhaDialog.show();"
+						style="display: block;" id="alterarSenha">
+						<span style="display: block;" id="spanAlterarSenha">Alterar Senha</span>
+					</a>
 				</div>
 			</div>
+			
+			<!-- Dialog do enviar Mensagem -->
+			<p:dialog widgetVar="enviarMsgDialog" id="alterarMsgDialog" width="800px"
+				modal="true" resizable="false" height="360px" header="Enviar Mensagem" dynamic="true" appendToBody="false">
+			</p:dialog>
+			
+			<!-- Dialog do alterar senha -->
+			<p:dialog widgetVar="alterarSenhaDialog" id="alterarSenhaDialog" width="240px"
+				modal="true" resizable="false" height="170px" header="Alterar Senha" dynamic="true" appendToBody="false">
+			corpo
+			</p:dialog>
+			
+			
+			<script>
+				$("#menupop").hide();
+			</script>
 		</h:body>
 	</h:form>
 </sec:isAuthenticated>
