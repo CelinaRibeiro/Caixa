@@ -48,3 +48,9 @@ function fecharMenupop(){
 		
 	}
 }
+
+function redirecionarPagina(context, pagina){
+	pagina = pagina + ".jsf";
+	document.location = context + pagina;
+	
+}
