@@ -44,7 +44,10 @@
 
 		<h:body>
 			<script type="text/javascript" charset="UTF-8">
-				$.noConflit();
+				$.noConflict();
+				localeData_pt_br();
+				initTamplete();
+				ocultarMenu();
 
 				/*Bloqueia F5 do teclado*/
 				$(document).keydown(function(e) {
@@ -157,13 +160,13 @@
 			<p:dialog widgetVar="alterarSenhaDialog" id="alterarSenhaDialog" width="240px"
 				modal="true" resizable="false" height="170px" header="Alterar Senha" dynamic="true" appendToBody="false">
 			corpo
-			</p:dialog>
-			
-			
-			<script>
-				$("#menupop").hide();
-			</script>
+			</p:dialog>					
 		</h:body>
 	</h:form>
+	
+	<script type="text/javascript" charset="UTF-8">
+	 	carregarIdElementosPagina();
+	
+	</script>
 </sec:isAuthenticated>
 </html>
