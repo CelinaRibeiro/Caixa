@@ -10,6 +10,7 @@
 	
 	<ui:composition template="/templates/templatePrincipal.xhtml">
 	
+	<!-- Form -->	
 		<ui:define name="corpo">
 			<h:form id="formCadastro" prependId="false">
 				<c:set var="isCadastro" value="true" scope="view"/>
@@ -20,21 +21,90 @@
 							value="#{cidadeBeanView.objetoSelecionado.cid_codigo}"/>
 						<h:outputLabel/>
 						
-						<h:outputLabel id="labelNomeConsultaCidade" for="cidadeNome" value="Nome * : "/>
+						<h:outputLabel id="labelNomeConsultaCidade" for="cidadeNome" value="Nome * :"/>
 						<p:inputText id="cidadeNome" styleClass="estyleInputNome"
-							required="true" maxlength="100" 
+							required="true" maxlength="100"
 							value="#{cidadeBeanView.objetoSelecionado.cid_descricao}"
 							requiredMessage="Informe o nome da cidade"/>
 						<p:message for="cidadeNome"/>	
+						
+						<h:outputLabel for="estado" id="labelEstado" value="Estado * :"/>
+						<p:selectOneMenu id="estado" required="true" style="width:200px;"
+							requiredMessage="Informe o Estado." 
+							value="#{cidadeBeanView.objetoSelecionado.estado}">
+							<f:selectItems value="#{estadoBeanView.estados}"/>
+						</p:selectOneMenu>
+						<p:message for="estado"/>			
 					</p:panelGrid>			
 				</p:panel>
 				
-				<p:commandButton value="Salvar" ajax="false" actionListener="#{cidadeBeanView.save}"/>
-			
-			
+			<!-- Espaço em branco -->	
+			<div class="espacoBranco"/>
+				
+			<!-- Buttons -->
+			<p:commandButton value="Salvar" ajax="false" action="#{cidadeBeanView.save}"/>
+			<p:commandButton value="Novo" ajax="false" action="#{cidadeBeanView.novo}"/>	
 			</h:form>
-		
-		
+			
+						
+			<!-- Chama functions js -->	
+			<script type="text/javascript" charset="UTF-8">
+			addFocoAoCampo("cidadeNome");
+			gerenciaTeclaEnter();
+			</script>
+			
+			<div class="espacoBranco"/>
+			
+			<!-- List table -->					
+			<p:dataTable id="tableResult" value="#{cidadeBeanView.list}" var="objeto"
+				emptyMessage="Não existem valores para exibição.">
+									
+				<p:column>
+					<center>
+						<f:facet name="header">Código</f:facet>
+						<h:outputText value="#{objeto.cid_codigo}"/>
+					</center>
+				</p:column>
+				
+				<p:column>
+					<center>
+						<f:facet name="header">Nome</f:facet>
+						<h:outputText value="#{objeto.cid_descricao}"/>
+					</center>
+				</p:column>
+				
+				<p:column>
+					<center>
+						<f:facet name="header">Estado</f:facet>
+						<h:outputText value="#{objeto.estado.est_nome}"/>
+					</center>
+				</p:column>
+				
+				<p:column>
+					<center>
+						<f:facet name="header">Editar</f:facet>
+						<p:commandLink action="#{cidadeBeanView.editar}" update="@form:formCadastro"
+							id="editarCidade" value="Editar" ajax="true" immediate="true">
+							<f:setPropertyActionListener 
+							value="#{objeto}" 
+							target="#{cidadeBeanView.objetoSelecionado}"/>
+						</p:commandLink>
+					</center>
+				</p:column>
+				
+				<p:column>
+					<center>
+						<f:facet name="header">Excluir</f:facet>
+						<p:commandLink action="#{cidadeBeanView.excluir}" update="tableResult"
+							id="excluirCidade" value="Excluir" ajax="true" immediate="true">
+							<f:setPropertyActionListener 
+							value="#{objeto}" 
+							target="#{cidadeBeanView.objetoSelecionado}"/>
+						</p:commandLink>
+					</center>
+				</p:column>
+				
+			</p:dataTable>
 		</ui:define>
 	</ui:composition>
 </html>

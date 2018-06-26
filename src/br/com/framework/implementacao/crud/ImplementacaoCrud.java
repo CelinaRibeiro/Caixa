@@ -94,7 +94,7 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 		validaSessionFactory();
 
 		StringBuilder query = new StringBuilder();
-		query.append("  select distinct(entity) from").append(entidade.getSimpleName()).append(" entity");
+		query.append("  select distinct(entity) from ").append(entidade.getSimpleName()).append(" entity ");
 
 		List<T> lista = sessionFactory.getCurrentSession().createQuery(query.toString()).list();
 		return lista;

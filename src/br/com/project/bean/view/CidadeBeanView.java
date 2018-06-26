@@ -3,6 +3,9 @@
  */
 package br.com.project.bean.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +28,45 @@ public class CidadeBeanView extends BeanManagedViewAbstract {
 
 	private static final long serialVersionUID = 1L;
 	
+	private String url = "/cadastro/cad_cidade.jsf?faces-redirect=true";
+	
 	private Cidade objetoSelecionado = new Cidade();
+	
+	private List<Cidade> list = new ArrayList<Cidade>();
 	
 	@Autowired
 	private CidadeController cidadeController;
 	
+	
+	public List<Cidade> getList() throws Exception{
+		list = cidadeController.findList(Cidade.class);
+		return list;
+	}
+	
 	@Override
 	public String save() throws Exception {
-		System.out.println(objetoSelecionado.getCid_descricao());
+		objetoSelecionado = cidadeController.merge(objetoSelecionado);
 		return "";
 	}
+	
+	@Override
+	public String novo() throws Exception {
+		objetoSelecionado = new Cidade();
+		return url;
+	}
+	
+	@Override
+	public String editar() throws Exception {
+		return url;
+	}
 
+	
+	@Override
+	public void excluir() throws Exception {
+		cidadeController.delete(objetoSelecionado);
+		novo();
+	}
+	
 	public Cidade getObjetoSelecionado() {
 		return objetoSelecionado;
 	}
@@ -43,8 +74,5 @@ public class CidadeBeanView extends BeanManagedViewAbstract {
 	public void setObjetoSelecionado(Cidade objetoSelecionado) {
 		this.objetoSelecionado = objetoSelecionado;
 	}
-	
-	
-	
 
 }
