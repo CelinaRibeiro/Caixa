@@ -57,7 +57,15 @@
 			
 			<!-- List table -->					
 			<p:dataTable id="tableResult" value="#{cidadeBeanView.list}" var="objeto"
-				emptyMessage="Não existem valores para exibição.">
+				emptyMessage="Não existem valores para exibição."
+				rendered="#{cidadeBeanView.list.size() > 0}"
+				rows="5"
+				paginator="true"
+				paginatorPosition="bottom"		
+				paginatorTemplate="{FirstPageLink}
+								   {PreviousPageLink} {PageLinks}
+								   {NextPageLink} {LastPageLink}
+								   {RowsPerPageDropdown}">
 									
 				<p:column>
 					<center>
