@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+	
+									
+				<p:column style="width: 100px;">
+					<center>
+						<f:facet name="header">Código</f:facet>
+						<h:outputText value="#{objeto.cid_codigo}"/>
+					</center>
+				</p:column>
+				
+				<p:column>
+					<center>
+						<f:facet name="header">Nome</f:facet>
+						<h:outputText value="#{objeto.cid_descricao}" id="nome"/>
+					</center>
+				</p:column>
+				
+				<p:column style="width: 400px;">
+					<center>
+						<f:facet name="header">Estado</f:facet>
+						<h:outputText value="#{objeto.estado.est_nome}"/>
+					</center>
+				</p:column>
+				
+				<sec:ifAnyGranted roles="CIDADE_EXCLUIR, ADMIN">
+				
+				<p:column style="width: 50px;">
+					<center>
+						<f:facet name="header">Excluir</f:facet>
+												
+						<c:choose>
+							<c:when test="${isCadastro == false}">
+							
+								<p:commandLink action="#{cidadeBeanView.excluir}" update="tableResult"
+									id="excluirCidade" ajax="true" immediate="true"
+									onclick="if(!confirm('Confirma a exclusão da cidade : #{objeto.cid_descricao}?')) return false;">
+									<h:graphicImage library="img" name="excluir16.png"/>
+									<f:setPropertyActionListener 
+									value="#{objeto}" target="#{cidadeBeanView.objetoSelecionado}"/>
+								</p:commandLink>
+								
+							</c:when>
+							
+							<c:otherwise>
+									<p:commandLink action="#{cidadeBeanView.excluir}" update="tableResult"
+									id="excluirCidade" ajax="false" immediate="true"
+									onclick="if(!confirm('Confirma a exclusão da cidade : #{objeto.cid_descricao}?')) return false;">
+									<h:graphicImage library="img" name="excluir16.png"/>
+									<f:setPropertyActionListener 
+									value="#{objeto}" target="#{cidadeBeanView.objetoSelecionado}"/>
+								</p:commandLink>
+							</c:otherwise>
+							
+						</c:choose>				
+						
+					</center>
+				</p:column>
+				</sec:ifAnyGranted>
+				
+				
+			<sec:ifAnyGranted roles="CIDADE_EDITAR, ADMIN">
+				<p:column style="width: 50px;">
+					<center>
+						<f:facet name="header">Editar</f:facet>
+						<p:commandLink action="#{cidadeBeanView.editar}" update="@form:formCadastro"
+							id="editarCidade" ajax="true" immediate="true"
+							oncomplete="addFocoCampo('cidadeNome');">
+							
+							<h:graphicImage library="img" name="editar16.png"/>
+							<f:setPropertyActionListener 
+							value="#{objeto}" 
+							target="#{cidadeBeanView.objetoSelecionado}"/>
+							
+						</p:commandLink>
+					</center>
+				</p:column>
+			</sec:ifAnyGranted>
+</html>

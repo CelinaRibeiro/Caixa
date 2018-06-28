@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -72,6 +73,20 @@ public class ContextoBean implements Serializable {
 		ExternalContext externalContext = context.getExternalContext();
 		return externalContext;
 
+	}
+	
+	public boolean possuiAcesso(String... acessos) {
+		for (String acesso: acessos) {
+			for(GrantedAuthority authority: getAuthentication().getAuthorities()) {
+				if(authority.getAuthority().trim().equals(acesso.trim())) {
+					return true;
+				}
+				
+			}
+			
+		}
+		return false;
+		
 	}
 
 }
