@@ -60,7 +60,7 @@ public enum Permissao {
 
 	public static List<Permissao> getListPermissao() {
 		List<Permissao> permissoes = new ArrayList<Permissao>();
-		for (Permissao permissao : Permissao.values()) {
+		for (Permissao permissao: Permissao.values()) {
 			permissoes.add(permissao);
 		}
 		Collections.sort(permissoes, new Comparator<Permissao>() {

@@ -13,7 +13,6 @@ import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
-import org.apache.commons.lang.ObjectUtils.Null;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.springframework.stereotype.Component;
@@ -65,7 +64,8 @@ public class ReportUtil implements Serializable{
 	private File arquivoGerado = null;
 	
 	public StreamedContent geraRelatorio(List<?> listDataBeanCollectionReport,
-			HashMap parametrosRelatorio, String nomeRelatorioJasper, String nomeRelatorioSaida, int tipoRelatorio) throws Exception{
+			HashMap parametrosRelatorio, String nomeRelatorioJasper, 
+			String nomeRelatorioSaida, int tipoRelatorio) throws Exception{
 		
 		/* Cria a lista de collectionDataSource de beans que carregam os dados para o relatoório */
 		JRBeanCollectionDataSource jrbcds = new JRBeanCollectionDataSource(listDataBeanCollectionReport);
@@ -75,9 +75,9 @@ public class ReportUtil implements Serializable{
 		 */
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.responseComplete();
-		ServletContext scontex = (ServletContext) context.getExternalContext().getContext();
+		ServletContext scontext = (ServletContext) context.getExternalContext().getContext();
 		
-		String caminhoRelatorio = scontex.getRealPath(FOLDER_RELATORIOS);
+		String caminhoRelatorio = scontext.getRealPath(FOLDER_RELATORIOS);
 		
 		//EX: -> c:/aplicacao/relatorios/rel_bairro.jasper
 		File file = new File(caminhoRelatorio + SEPARATOR + nomeRelatorioJasper + PONTO + "jasper");
@@ -134,7 +134,7 @@ public class ReportUtil implements Serializable{
 		}
 		
 		//Gera o nome do relatorio
-		nomeRelatorioSaida += UNDERLINE + DateUtils.getDataAtualReportName();
+		nomeRelatorioSaida += UNDERLINE + DateUtils.getDateAtualReportName();
 		
 		/*Caminho do relatório exportado */
 		caminhoArquivoRelatorio = caminhoRelatorio + SEPARATOR + nomeRelatorioSaida + PONTO + extensaoArquivoExportado;

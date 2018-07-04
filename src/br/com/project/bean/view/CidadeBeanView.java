@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
+import org.primefaces.model.StreamedContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,15 @@ public class CidadeBeanView extends BeanManagedViewAbstract {
 	private CidadeController cidadeController;
 	
 	
+	@Override
+	public StreamedContent getArquivoReport() throws Exception {
+		super.setNomeRelatorioJasper("report_cidade");
+		super.setNomeRelatorioSaida("report_cidade");
+		super.setListDataBeanCollectionReport(cidadeController.findList(getClassImplement()));
+		return super.getArquivoReport();
+	}
+	
+		
 	public List<Cidade> getList() throws Exception{
 		list = cidadeController.findList(getClassImplement());
 		return list;

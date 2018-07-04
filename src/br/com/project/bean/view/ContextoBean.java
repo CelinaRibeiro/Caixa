@@ -76,7 +76,7 @@ public class ContextoBean implements Serializable {
 	}
 	
 	public boolean possuiAcesso(String... acessos) {
-		for (String acesso: acessos) {
+		for (String acesso : acessos) {
 			for(GrantedAuthority authority: getAuthentication().getAuthorities()) {
 				if(authority.getAuthority().trim().equals(acesso.trim())) {
 					return true;

@@ -42,6 +42,8 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 
 	@Autowired
 	private SimpleJdbcTemplateImpl simpleJdbcTemplateImpl;
+	
+	
 
 	@Override
 	public void save(T obj) throws Exception {
@@ -169,15 +171,15 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
-
-	@Override
-	public SimpleJdbcTemplate getSimpleJdbcTemplate() {
-		return simpleJdbcTemplate;
-	}
-
+	
 	@Override
 	public SimpleJdbcInsert getSimpleJdbcInsert() {
 		return simpleJdbcInsert;
+	}
+	
+	@Override
+	public SimpleJdbcTemplate getSimpleJdbcTemplate() {
+		return simpleJdbcTemplate;
 	}
 	
 	public SimpleJdbcTemplateImpl getSimpleJdbcTemplateImpl() {

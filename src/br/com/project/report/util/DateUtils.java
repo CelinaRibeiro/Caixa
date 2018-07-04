@@ -17,7 +17,7 @@ public class DateUtils implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	public static String getDataAtualReportName() {
+	public static String getDateAtualReportName() {
 		DateFormat df = new SimpleDateFormat("ddMMyyyy");
 		return df.format(Calendar.getInstance().getTime());
 	}

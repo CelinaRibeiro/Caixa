@@ -9,9 +9,13 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	<ui:composition template="/templates/templatePrincipal.xhtml">
+	<ui:define name="corpo">
 	
-	<!-- Form -->	
-		<ui:define name="corpo">
+		<h:commandLink immediate="true">
+			<p:fileDownload value="#{cidadeBeanView.arquivoReport}"/>
+			<h:graphicImage library="img" name="pdf.png"/>
+		</h:commandLink>
+					
 			<h:form id="formCadastro" prependId="false">
 				<c:set var="isCadastro" value="true" scope="view"/>
 				<p:panel header="Cadastro de Cidade" id="panelCadastro">
@@ -20,7 +24,7 @@
 						<p:inputText id="id" styleClass="estiloIdCadastro" disabled="true"
 							value="#{cidadeBeanView.objetoSelecionado.cid_codigo}"/>
 						<h:outputLabel/>
-						
+														
 						<h:outputLabel id="labelNomeConsultaCidade" for="cidadeNome" value="Nome * :"/>
 						<p:inputText id="cidadeNome" styleClass="estyleInputNome"
 							required="true" maxlength="100"

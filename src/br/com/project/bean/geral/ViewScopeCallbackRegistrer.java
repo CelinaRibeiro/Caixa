@@ -27,11 +27,13 @@ public class ViewScopeCallbackRegistrer implements ViewMapListener{
 	@Override
 	public void processEvent(SystemEvent event) throws AbortProcessingException {
 		if(event instanceof PostConstructViewMapEvent) {
+			
 			PostConstructViewMapEvent viewMapEvent = (PostConstructViewMapEvent) event;
 			UIViewRoot uiViewRoot = (UIViewRoot) viewMapEvent.getComponent();
 			uiViewRoot.getViewMap().put(ViewScope.VIEW_SCOPE_CALLBACKS, new HashMap<String, Runnable>());
 		}
 		else if(event instanceof PreDestroyViewMapEvent) {
+			
 			PreDestroyViewMapEvent viewMapEvent = (PreDestroyViewMapEvent) event;
 			UIViewRoot viewRoot = (UIViewRoot) viewMapEvent.getComponent();
 			Map<String, Runnable> callbacks = (Map<String, Runnable>) viewRoot.getViewMap().get(ViewScope.VIEW_SCOPE_CALLBACKS);
