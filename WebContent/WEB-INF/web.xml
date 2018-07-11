@@ -42,6 +42,7 @@ id="WebApp_ID" metadata-complete="true" version="3.0">
       <el-ignored>false</el-ignored>
     </jsp-property-group>
   </jsp-config>
+  
   <context-param>
     <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
     <param-value>true</param-value>

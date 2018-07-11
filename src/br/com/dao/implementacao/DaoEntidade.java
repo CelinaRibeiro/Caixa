@@ -17,7 +17,7 @@ import br.com.repository.interfaces.RepositoryEntidade;
  *
  */
 
-@Repository
+@Repository // //identifica DAOs
 public class DaoEntidade extends ImplementacaoCrud<Entidade> implements RepositoryEntidade {
 
 	private static final long serialVersionUID = 1L;

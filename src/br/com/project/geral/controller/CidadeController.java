@@ -18,7 +18,7 @@ import br.com.srv.interfaces.SrvCidade;
  *
  */
 
-@Controller
+@Controller //@Controller para controladores do Spring MVC
 public class CidadeController extends ImplementacaoCrud<Cidade> implements InterfaceCrud<Cidade> {
 
 	private static final long serialVersionUID = 1L;

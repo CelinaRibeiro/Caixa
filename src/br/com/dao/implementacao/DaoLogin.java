@@ -13,7 +13,7 @@ import br.com.repository.interfaces.RepositoryLogin;
  * @author Celina
  *
  */
-@Repository 
+@Repository  //identifica DAOs
 public class DaoLogin extends ImplementacaoCrud<Object> implements RepositoryLogin {
 
 	private static final long serialVersionUID = 1L;
