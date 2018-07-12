@@ -143,8 +143,8 @@
 					
 						<p:submenu label="Cadastros" id="subMenuCadastro">
 							<sec:ifAnyGranted roles="CIDADE_ACESSAR, ADMIN">
-								<p:menuitem value="Cidade" id="menuCidade"
-								action="/cadastro/cad_cidade.jsf?faces-redirect=true">
+								<p:menuitem value="Cidade" id="menuCidade" immediate="true"
+								action="#{cidadeBeanView.redirecionarFindEntidade}">
 								
 								</p:menuitem>
 							</sec:ifAnyGranted>
