@@ -24,7 +24,7 @@ import br.com.project.model.classes.Cidade;
  */
 
 @Controller
-@Scope(value = "session") //Definimos o escopo de um bean
+@Scope(value = "session")
 @ManagedBean(name = "cidadeBeanView")
 public class CidadeBeanView extends BeanManagedViewAbstract {
 

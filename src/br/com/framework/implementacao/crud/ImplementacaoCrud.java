@@ -23,7 +23,7 @@ import br.com.framework.interfac.crud.InterfaceCrud;
  * @author Celina
  *
  */
-@Component //Identifica a classe como um componente
+@Component
 @Transactional
 public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 
@@ -43,7 +43,8 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 	@Autowired
 	private SimpleJdbcTemplateImpl simpleJdbcTemplateImpl;
 	
-	//métodos
+	
+
 	@Override
 	public void save(T obj) throws Exception {
 		validaSessionFactory();
@@ -57,7 +58,7 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 		sessionFactory.getCurrentSession().persist(obj);
 		executeFlushSession();
 	}
-	
+
 	@Override
 	public void saveOrUpdate(T obj) throws Exception {
 		validaSessionFactory();
@@ -65,7 +66,7 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 		executeFlushSession();
 
 	}
-	
+
 	@Override
 	public void update(T obj) throws Exception {
 		validaSessionFactory();

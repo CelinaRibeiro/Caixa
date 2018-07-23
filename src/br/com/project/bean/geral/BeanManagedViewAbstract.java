@@ -5,9 +5,9 @@ package br.com.project.bean.geral;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.model.SelectItem;
@@ -35,18 +35,15 @@ public abstract class BeanManagedViewAbstract extends BeanReportView{
 	
 	public ObjetoCampoConsulta objetoCampoConsultaSelecionado;
 	
-	
-	//lista de selectItem do combobox genérico
 	public List<SelectItem> listaCampoPesquisa;
 	
-	//lista seleção de pesquisa
 	public List<SelectItem> listaCondicaoPesquisa;
 	
 	public CondicaoPesquisa condicaoPesquisaSelecionado;
 	
 	public String valorPesquisa;
 	
-	
+		
 	public String getValorPesquisa() {
 		return valorPesquisa != null ? new UtilitariaRegex().retiraAcentos(valorPesquisa) : "";
 	}
@@ -67,7 +64,6 @@ public abstract class BeanManagedViewAbstract extends BeanReportView{
 		listaCondicaoPesquisa = new ArrayList<SelectItem>();
 		for(CondicaoPesquisa condicaoPesquisa : CondicaoPesquisa.values()) {
 			listaCondicaoPesquisa.add(new SelectItem(condicaoPesquisa, condicaoPesquisa.toString()));
-			
 		}
 		
 		return listaCondicaoPesquisa;
@@ -102,25 +98,27 @@ public abstract class BeanManagedViewAbstract extends BeanReportView{
 		listaCampoPesquisa = new ArrayList<SelectItem>();
 		List<ObjetoCampoConsulta> listTemp = new ArrayList<ObjetoCampoConsulta>();
 		
-		for(Field field : getClassImplement().getDeclaredFields()) {
-			if(field.isAnnotationPresent(IdentificaCampoPesquisa.class)){
+		for( Field field : getClassImplement().getDeclaredFields()) {
+			if(field.isAnnotationPresent(IdentificaCampoPesquisa.class)) {
 				String descricao = field.getAnnotation(IdentificaCampoPesquisa.class).descricaoCampo();
 				String descricaoCampoPesquisa = field.getAnnotation(IdentificaCampoPesquisa.class).campoConsulta();
-				int isprincipal = field.getAnnotation(IdentificaCampoPesquisa.class).principal();
+				int isPrincipal = field.getAnnotation(IdentificaCampoPesquisa.class).principal();
 				
 				ObjetoCampoConsulta objetoCampoConsulta = new ObjetoCampoConsulta();
 				objetoCampoConsulta.setDescricao(descricao);
 				objetoCampoConsulta.setCampoBanco(descricaoCampoPesquisa);
 				objetoCampoConsulta.setTipoClass(field.getType().getCanonicalName());
-				objetoCampoConsulta.setPrincipal(isprincipal);
+				objetoCampoConsulta.setPrincipal(isPrincipal);
 				listTemp.add(objetoCampoConsulta);
 			}
+			
 		}
 		
 		orderReverse(listTemp);
 		
 		for(ObjetoCampoConsulta objetoCampoConsulta : listTemp) {
 			listaCampoPesquisa.add(new SelectItem(objetoCampoConsulta));
+			
 		}
 		
 		return listaCampoPesquisa;
@@ -134,5 +132,9 @@ public abstract class BeanManagedViewAbstract extends BeanReportView{
 				return objt1.getPrincipal().compareTo(objt2.getPrincipal());
 			}
 		});
+		
 	}
+	
+	
+
 }
